@@ -124,18 +124,15 @@ public class StringMethods {
 		
 		s = " " + s;
 		
-		System.out.println(s);
-		System.out.println(substring);
+		//System.out.println(s);
+		//System.out.println(substring);
 		
 		for (int i = 0; i < s.length(); i++) {
-			if(Character.isWhitespace(s.charAt(i))) {
-				s.end
-				index = s.indexOf(substring, i);
-				if(index != -1) {
-					i = index - substring.length();
-					System.out.println(i);
-					count++;
-				}
+			index = s.indexOf(substring, i);
+			if(index != -1 && Character.isWhitespace(s.charAt(index+substring.length()))) {
+				i = index;
+				//System.out.println(i);
+				count++;
 			}
 		}
 		
@@ -147,7 +144,8 @@ public class StringMethods {
 	// of String substring and the final occurrence
 	// You can assume that substring will appear at least twice
 	public static int distance(String s, String substring) {
-		return 0;
+		//return lastLoc - firstLoc;
+		return s.lastIndexOf(substring) - s.indexOf(substring) - substring.length();
 	}
 
 
@@ -155,7 +153,34 @@ public class StringMethods {
 	// palindromes are words or phrases are read the same forward as backward.
 	// HINT: ignore/remove all punctuation and spaces in the String
 	public static boolean palindrome(String s) {
-		return true;
+		char[] flippedC = new char[s.length()];
+		String flipped = "";
+		System.out.println(s);
+		
+		for (int i = 0; i < s.length(); i++) {
+			if(!Character.isAlphabetic(s.charAt(i))) {
+				System.out.println(""+s.charAt(i));
+				s = s.replaceAll(""+s.charAt(i), "");
+			}
+		}
+		
+		System.out.println(s);
+		
+		for (int i = s.length()-1; i > 0; i--) {
+			flippedC[i] = s.charAt(i);
+		}
+		
+		for (int i = 0; i < flippedC.length; i++) {
+			flipped.concat("" + flippedC[i]);
+		}
+		
+		System.out.println(flipped);
+
+		if (!s.equalsIgnoreCase(flipped)) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 	
 }
