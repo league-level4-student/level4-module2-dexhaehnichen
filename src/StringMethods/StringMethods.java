@@ -153,36 +153,31 @@ public class StringMethods {
 	// palindromes are words or phrases are read the same forward as backward.
 	// HINT: ignore/remove all punctuation and spaces in the String
 	public static boolean palindrome(String s) {
-		char[] flippedC = new char[s.length()];
-		String flipped = "";
-		System.out.println(s);
-		
-		for (int i = 0; i < s.length(); i++) {
-			if(!Character.isAlphabetic(s.charAt(i))) {
-				System.out.println(""+s.charAt(i));
-				s = s.replaceAll(""+s.charAt(i), "");
+		StringBuilder builder = new StringBuilder(s);
+		String flipped;
+		for(int j = 0; j < 3; j++) {
+			for (int i = 0; i < s.length(); i++) {
+				char c = s.charAt(i); 
+				if (!(c >= 'A' && c <= 'Z') && !(c >= 'a' && c <= 'z') || c == 'â') {
+					System.out.println(""+s.charAt(i));
+					s = builder.deleteCharAt(i).toString();
+					//s = s.replaceAll(""+s.charAt(i), "");
+					//System.out.println(s);
+				}
 			}
 		}
 		
 		System.out.println(s);
 		
-		for (int i = s.length()-1; i > 0; i--) {
-			flippedC[i] = s.charAt(i);
-		}
-		
-		for (int i = 0; i < flippedC.length; i++) {
-			flipped.concat("" + flippedC[i]);
-		}
-		
+		flipped = builder.reverse().toString();
 		System.out.println(flipped);
-
-		if (!s.equalsIgnoreCase(flipped)) {
+		
+		if (s.equalsIgnoreCase(flipped)) {
 			return true;
 		}else {
 			return false;
 		}
 	}
-	
 }
 
 class Utilities {
